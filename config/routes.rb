@@ -25,6 +25,9 @@ end
 #get '/faq', to: 'home#faq', as faq_action
 
 resources :users, only: [:new, :create]
+resources :sessions, only: [:new, :create] do
+  delete :destroy, on: :collection
+end
 
 
 
