@@ -6,15 +6,18 @@ class SessionsController < ApplicationController
 @user = User.find_by_email(params[:emails])
 
    if @user && @user.authenticate(params [:password])
-     sessions[:user_id] = @user.id
+     session[:user_id] = @user.id
+     flash[:notice] = "Signed in!"
      redirect_to root_path
    else
+     flash[:alert] = "Could not sign in"
      render :new
    end
   end
 
   def destroy
   session[:user_id] = nil
+  flash[:notice] = "Signed out!"
   redirect_to root_path
   end
 
