@@ -1,0 +1,22 @@
+<h1><%=  @product.title %></h1>
+<p><%= @product.description %></p>
+<p><%= @product.price %></p>
+<%= link_to 'Edit', edit_product_path(@product) %>
+
+<%= link_to 'Delete', product_path(@product),
+method: :delete,
+data: {confirm: 'are you sure'}%>
+
+<h1>Reviews</h1>
+
+<%= form_for [@product, @review] do |r| %>
+<%= r.text_area :body %>
+<%= r.text_field :rating %>
+
+<%= r.submit %>
+<% end %>
+
+<% @product.reviews.each do |review|%>
+<p><%= review.body %></p>
+<h2><%= ra %>
+<% end  %>

@@ -1,0 +1,20 @@
+<h1> Edit page </h1>
+
+<%= form_for @product do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <br><br>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+    <br><br>
+  <div>
+    <%= f.label :price %>
+    <%= f.text_area :price %>
+  </div>
+    <br><br>
+  <%= f.submit %>
+<% end %>
