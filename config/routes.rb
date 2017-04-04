@@ -6,7 +6,7 @@ get('/contact', {to: 'contact#index'})
 post('/contact', {to: 'contact#create', as: 'contact_submit'})
 
 resources :products do
-  resources :reviews 
+  resources :reviews
 end
 #resources :products, only: [:index, :show]
 #resources :products, except: [:index, :show]
@@ -23,6 +23,9 @@ end
 #get  '/questions/:id', to: 'questions#show', as: question_show
 #post '/questions/:id', to: 'questions#create', as: question_create
 #get '/faq', to: 'home#faq', as faq_action
+
+resources :users, only: [:new, :create]
+
 
 
    root 'welcome#index'
