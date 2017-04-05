@@ -1,5 +1,6 @@
 <h1>Product</h1>
   <% @products.each do |product| %>
   <%= link_to product.title, product_path(product) %>
+  <p><%= product.user.first_name %></p>
   <br>
 <%end %>
