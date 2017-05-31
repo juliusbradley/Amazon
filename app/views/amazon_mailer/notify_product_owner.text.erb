@@ -1,0 +1,9 @@
+Hello <%= @product.user.first_name %>,
+
+<%= @user.first_name.capitalize %> has just created a product called: <%= @product.title %>.
+
+Click <%= link_to "here", product_url(@product) %> to view your post.
+
+Regards,
+
+Amazon posts team

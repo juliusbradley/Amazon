@@ -5,9 +5,23 @@ get('/about', {to: 'about#index'})
 get('/contact', {to: 'contact#index'})
 post('/contact', {to: 'contact#create', as: 'contact_submit'})
 
-resources :products do
-  resources :reviews
+namespace :api, defaults: { format: :json} do
+    namespace :v1 do
+      #api/v1/products/json    => INDEX
+      #api/v1/products/1.json  => SHOW
+    resources :products, only: [:index, :show]
+  end
 end
+
+resources :products do
+  resources :reviews do
+    resources :likes, only: [:create, :destroy]
+    resources :votes
+  end
+end
+
+
+resources :tags, only: [:index, :show]
 #resources :products, only: [:index, :show]
 #resources :products, except: [:index, :show]
 
@@ -29,6 +43,9 @@ resources :sessions, only: [:new, :create] do
   delete :destroy, on: :collection
 end
 
+namespace :admin do
+  resources :dashboard, only: [:index]
+end
 
 
    root 'welcome#index'

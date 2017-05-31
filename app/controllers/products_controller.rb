@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
     @product.user = current_user
 
   if @product.save
+    AmazonMailer.notify_product_owner(@product).deliver_now
     redirect_to @product
   else
     render :new
@@ -25,6 +26,17 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find params[:id]
     @review = Review.new
+    @like = @review.likes (current_user)
+    respond_to do |format|
+    #this means that if the format of the request is HTML then we will render the
+    #show template (questions/show.html.erb)
+    format.html {render :show}
+
+    #this will render 'json' if the format of the request is JSON.
+    #ActiveRecord has a built in feature to generate JSON from any object of
+    #ActiveRecord
+    format.json {render json: @product}
+    end
   end
 
   def edit
@@ -55,6 +67,6 @@ private
  end
 
  def product_params
-  params.require(:product).permit([:title, :description, :price, :category_id])
+  params.require(:product).permit([:title, :description, :price, :category_id , { tag_ids: [] } ])
  end
 end

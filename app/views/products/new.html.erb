@@ -21,6 +21,11 @@
   <%= f.collection_select :category_id, Category.all, :id, :name %>
     <br><br>
   </div>
+  <div class = "form group">
+    <%= f.collection_select :tag_ids, Tag.order(:name), :id, :name,
+                          {},
+                          { multiple: true, class: 'chosen-select', style: 'width: 400px' } %>
+  </div>
     <br><br>
   <%= f.submit %>
   <% end %>
